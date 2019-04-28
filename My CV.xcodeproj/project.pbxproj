@@ -16,6 +16,14 @@
 		01E30BB822757775008D71B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E30BB622757775008D71B2 /* LaunchScreen.storyboard */; };
 		01E30BC322757775008D71B2 /* My_CVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BC222757775008D71B2 /* My_CVTests.swift */; };
 		01E30BCE22757775008D71B2 /* My_CVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BCD22757775008D71B2 /* My_CVUITests.swift */; };
+		01E30BDC22758174008D71B2 /* CVDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BDB22758174008D71B2 /* CVDataViewController.swift */; };
+		01E30BDE22758480008D71B2 /* CVModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BDD22758480008D71B2 /* CVModelController.swift */; };
+		01E30BE022759116008D71B2 /* CVRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BDF22759116008D71B2 /* CVRootViewController.swift */; };
+		01E30BE2227595A0008D71B2 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BE12275959F008D71B2 /* Identifiers.swift */; };
+		01E30BE42275966A008D71B2 /* CVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BE32275966A008D71B2 /* CVModel.swift */; };
+		01E30BE62275B6D9008D71B2 /* CVPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BE52275B6D9008D71B2 /* CVPortfolioViewController.swift */; };
+		01E30BE82275C2AE008D71B2 /* CVContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BE72275C2AE008D71B2 /* CVContactViewController.swift */; };
+		01E30BEA2275CB7A008D71B2 /* CVDescriptiveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E30BE92275CB7A008D71B2 /* CVDescriptiveView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,14 @@
 		01E30BC922757775008D71B2 /* My CVUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "My CVUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E30BCD22757775008D71B2 /* My_CVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = My_CVUITests.swift; sourceTree = "<group>"; };
 		01E30BCF22757775008D71B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01E30BDB22758174008D71B2 /* CVDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVDataViewController.swift; sourceTree = "<group>"; };
+		01E30BDD22758480008D71B2 /* CVModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVModelController.swift; sourceTree = "<group>"; };
+		01E30BDF22759116008D71B2 /* CVRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVRootViewController.swift; sourceTree = "<group>"; };
+		01E30BE12275959F008D71B2 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
+		01E30BE32275966A008D71B2 /* CVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVModel.swift; sourceTree = "<group>"; };
+		01E30BE52275B6D9008D71B2 /* CVPortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPortfolioViewController.swift; sourceTree = "<group>"; };
+		01E30BE72275C2AE008D71B2 /* CVContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVContactViewController.swift; sourceTree = "<group>"; };
+		01E30BE92275CB7A008D71B2 /* CVDescriptiveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CVDescriptiveView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,13 +118,21 @@
 			isa = PBXGroup;
 			children = (
 				01E30BA922757774008D71B2 /* AppDelegate.swift */,
+				01E30BE12275959F008D71B2 /* Identifiers.swift */,
+				01E30BE32275966A008D71B2 /* CVModel.swift */,
 				01E30BAB22757774008D71B2 /* RootViewController.swift */,
+				01E30BDF22759116008D71B2 /* CVRootViewController.swift */,
+				01E30BDB22758174008D71B2 /* CVDataViewController.swift */,
+				01E30BDD22758480008D71B2 /* CVModelController.swift */,
 				01E30BAD22757774008D71B2 /* DataViewController.swift */,
 				01E30BAF22757774008D71B2 /* ModelController.swift */,
 				01E30BB122757774008D71B2 /* Main.storyboard */,
+				01E30BE92275CB7A008D71B2 /* CVDescriptiveView.xib */,
 				01E30BB422757775008D71B2 /* Assets.xcassets */,
 				01E30BB622757775008D71B2 /* LaunchScreen.storyboard */,
 				01E30BB922757775008D71B2 /* Info.plist */,
+				01E30BE52275B6D9008D71B2 /* CVPortfolioViewController.swift */,
+				01E30BE72275C2AE008D71B2 /* CVContactViewController.swift */,
 			);
 			path = "My CV";
 			sourceTree = "<group>";
@@ -235,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E30BEA2275CB7A008D71B2 /* CVDescriptiveView.xib in Resources */,
 				01E30BB822757775008D71B2 /* LaunchScreen.storyboard in Resources */,
 				01E30BB522757775008D71B2 /* Assets.xcassets in Resources */,
 				01E30BB322757774008D71B2 /* Main.storyboard in Resources */,
@@ -262,10 +287,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E30BE022759116008D71B2 /* CVRootViewController.swift in Sources */,
+				01E30BDE22758480008D71B2 /* CVModelController.swift in Sources */,
+				01E30BE2227595A0008D71B2 /* Identifiers.swift in Sources */,
 				01E30BAC22757774008D71B2 /* RootViewController.swift in Sources */,
+				01E30BE82275C2AE008D71B2 /* CVContactViewController.swift in Sources */,
 				01E30BB022757774008D71B2 /* ModelController.swift in Sources */,
 				01E30BAE22757774008D71B2 /* DataViewController.swift in Sources */,
+				01E30BE62275B6D9008D71B2 /* CVPortfolioViewController.swift in Sources */,
+				01E30BE42275966A008D71B2 /* CVModel.swift in Sources */,
 				01E30BAA22757774008D71B2 /* AppDelegate.swift in Sources */,
+				01E30BDC22758174008D71B2 /* CVDataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
