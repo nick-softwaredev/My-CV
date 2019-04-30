@@ -12,41 +12,99 @@ import UIKit
 
 class CVDataViewController: UIViewController {
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     var dataObject = CVModel()
+    var experienceObject: [Int: [ExperienceModel]]?
+    
+    var index = 0
     
     let backgroundImageArray = ["","",""]
     let segues = ["", ""]
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var actionButton: UIButton!
-    @IBOutlet weak var backgroundImage: UIImageView!
-    
+    var currentView = UIView()
+    var isUnloaded = true
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        backgroundImage.image = UIImage(named: "back")
         // Do any additional setup after loading the view.
+//        var vcID = ""
+//
+//        backgroundImage.image = UIImage(named: "back")
+//        switch dataObject.contentType {
+//        case .descriptive: vcID = "CVDescriptiveView"
+//        if let customView = Bundle.main.loadNibNamed(vcID, owner: self, options: nil)?.first as? CVDescriptiveView {
+//            customView.setup(with: dataObject)
+//            currentView = customView
+//            view.addSubview(customView)
+//            }
+//        case .contact: vcID = "CVContactView"
+//        if let customView = Bundle.main.loadNibNamed(vcID, owner: self, options: nil)?.first as? CVContactView {
+//            currentView = customView
+//                   view.addSubview(customView)
+//            }
+//        case .intercative: vcID = "CVInteractiveView"
+//        if let customView = Bundle.main.loadNibNamed(vcID, owner: self, options: nil)?.first as? CVInteractiveView, let _experienceObject = experienceObject {
+//            currentView = customView
+//            customView.setup(with: _experienceObject)
+//            view.addSubview(customView)
+//            }
+//        }
+        //setup view func
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-          self.titleLabel!.text = dataObject.title
-          self.profileImage.image = UIImage(named: dataObject.imageTitle)
-          self.descriptionTextView.text = dataObject.description
-          self.actionButton.titleLabel?.text = dataObject.buttonTitle
         
-          backgroundImage.image = UIImage(named: "backround")
+        guard isUnloaded == true else { return }
         
-          view.addSubview(loadView())
-    }
-
-    func loadView() -> UIView {
-        //switch contentType {}
-        let view = UIView()
-        view.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
-        view.backgroundColor = .white
-        return view
+        var vcID = ""
+        
+        
+        switch dataObject.contentType {
+        case .descriptive: vcID = "CVDescriptiveView"
+        if let customView = Bundle.main.loadNibNamed(vcID, owner: self, options: nil)?.first as? CVDescriptiveView {
+            customView.setup(with: dataObject)
+            currentView = customView
+            currentView.tag = dataObject.pageIndex
+            view.addSubview(customView)
+            isUnloaded = false
+            print("Loaded De")
+            }
+        case .contact: vcID = "CVContactView"
+        if let customView = Bundle.main.loadNibNamed(vcID, owner: self, options: nil)?.first as? CVContactView {
+            currentView = customView
+            currentView.tag = dataObject.pageIndex
+            view.addSubview(customView)
+            isUnloaded = false
+            print("Loaded Co \(currentView)")
+            }
+        case .intercative: vcID = "CVInteractiveView"
+        if let customView = Bundle.main.loadNibNamed(vcID, owner: self, options: nil)?.first as? CVInteractiveView, let _experienceObject = experienceObject {
+            currentView = customView
+            currentView.tag = dataObject.pageIndex
+            customView.setup(with: _experienceObject)
+            view.addSubview(customView)
+            isUnloaded = false
+            print("Loaded In \(currentView)")
+            }
+        }
+        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if let _view = currentView as? CVDescriptiveView, _view.tag == 1 {
+            _view.animate()
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        currentView.removeFromSuperview()
+        print("Unloaded \(currentView)")
+        isUnloaded = true
+    }
     
 }

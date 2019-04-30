@@ -37,6 +37,10 @@ class CVModelController: NSObject, UIPageViewControllerDataSource {
         // Create a new view controller and pass suitable data.
         let cvDataViewController = storyboard.instantiateViewController(withIdentifier: "CVDataViewController") as! CVDataViewController
         cvDataViewController.dataObject = pageData[index]
+        cvDataViewController.index = index
+        if pageData[index].contentType == .intercative {
+            cvDataViewController.experienceObject = getExperience()
+        }
         return cvDataViewController
     }
     
@@ -44,7 +48,8 @@ class CVModelController: NSObject, UIPageViewControllerDataSource {
     func indexOfViewController(_ viewController: CVDataViewController) -> Int {
         // Return the index of the given data view controller.
         // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-        let index = pageData[viewController.dataObject.pageIndex].pageIndex
+        //let index = pageData[viewController.dataObject.pageIndex].pageIndex
+        let index = viewController.index
         return index
     }
     
@@ -77,11 +82,15 @@ class CVModelController: NSObject, UIPageViewControllerDataSource {
 
 extension CVModelController {
     func getData()-> [CVModel] {
-        let inputData = [["titleKey": "Hello!", "descriptionKey" : "This is cv text for this topic", "imageKey": "giphy.gif", "buttonTitleKey": "MyButton", "pageIndexKey" : "0"], ["titleKey": "Buy!", "descriptionKey" : "This is cv text for this topic", "imageKey": "image.jpg", "buttonTitleKey": "MyButton", "pageIndexKey" : "1"]]
+        let inputData = [["titleKey": "Hello!", "descriptionKey" : "This is cv text for this topic", "imageKey": "backround", "buttonTitleKey": "MyButton", "pageIndexKey" : "34", "pageTypeKey" : "descriptive"],["titleKey": "next!", "descriptionKey" : "This is cv text for this topic", "imageKey": "giphy.gif", "buttonTitleKey": "MyButton", "pageIndexKey" : "1", "pageTypeKey" : "descriptive"], ["titleKey": "Buy!", "descriptionKey" : "This is cv text for this topic", "imageKey": "image.jpg", "buttonTitleKey": "MyButton", "pageIndexKey" : "2", "pageTypeKey" : "interactive"], ["titleKey": "Buy!", "descriptionKey" : "This is cv text for this topic", "imageKey": "image.jpg", "buttonTitleKey": "MyButton", "pageIndexKey" : "3", "pageTypeKey" : "contact"]]
         var cvData = [CVModel]()
         inputData.forEach { (modelDictionary) in
             cvData.append(CVModel(cvData: modelDictionary))
         }
         return cvData
+    }
+    func getExperience()-> [Int: [ExperienceModel]]{
+        let data = [0: [ExperienceModel(type: .job, image: "example", description: "This is the example project", url: "example.url")]]
+        return data
     }
 }

@@ -11,7 +11,5 @@ import Foundation
 class Identifiers {
     static let shared = Identifiers()
     
-//    enum controllerID {
-//    case .
-//    }
+    //add XIB names CONTOLLER ids
 }
