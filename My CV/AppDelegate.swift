@@ -41,6 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
 
+extension UserDefaults {
+    static func isFirstLaunch() -> Bool {
+        let applicationWasLaunchedFirstTimeKey = "applicationWasLaunchedFirstTime"
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: applicationWasLaunchedFirstTimeKey)
+        if (isFirstLaunch) {
+            UserDefaults.standard.set(true, forKey: applicationWasLaunchedFirstTimeKey)
+            UserDefaults.standard.synchronize()
+        }
+        return isFirstLaunch
+    }
+}

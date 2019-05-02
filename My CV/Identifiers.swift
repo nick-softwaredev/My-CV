@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Identifiers {
+final class Identifiers {
     static let shared = Identifiers()
     
     //add XIB names CONTOLLER ids
