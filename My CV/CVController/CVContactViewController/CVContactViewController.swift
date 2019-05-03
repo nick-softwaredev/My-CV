@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class CVContactViewController: CVDataViewController, CVSetupDelegate {
     
@@ -31,14 +32,13 @@ class CVContactViewController: CVDataViewController, CVSetupDelegate {
         super.viewDidLoad()
         titleLabel.text = titleLabelText
         questionOneLabel.text = "Want to invite me to an interview?\nFeel free to press that button."
-        questionTwoLabel.text = ""
+        questionTwoLabel.text = "Am I not good enough?\nLet me know how to get better."
         
         setupContactAlert()
         setupFeedbackAlert()
-        // Do any additional setup after loading the view.
     }
     
-    override func setupWith(descpription: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
+    override func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
         contactModel = contactData
     }
     
@@ -48,11 +48,7 @@ class CVContactViewController: CVDataViewController, CVSetupDelegate {
                 return
             }
             if UIApplication.shared.canOpenURL(phoneURL){
-                if #available(iOS 10.0, *) {
                     UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(phoneURL as URL)
-                }
             }
         }
         let emailAction = UIAlertAction(title: "Email", style: .default) { [unowned self] (_) in
@@ -79,23 +75,16 @@ class CVContactViewController: CVDataViewController, CVSetupDelegate {
             newTextField.delegate = self
         }
         feedbackAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        feedbackAlert.addAction(UIAlertAction(title: "Ok", style: .default) { action in
+        feedbackAlert.addAction(UIAlertAction(title: "Proceed", style: .default) { [unowned self] action in
             if let textFields = self.feedbackAlert.textFields, let textField = textFields.first, let result = textField.text {
-                print(result)
+                 self.sendEmail(to: self.contactModel?.email ?? "", withMessage: result)
             }
         })
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparaprofileImageNametion before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+//Mark: UITextFieldDelegateUI
 
 extension CVContactViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -104,5 +93,27 @@ extension CVContactViewController: UITextFieldDelegate {
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
         return newString.length <= maxLength
+    }
+}
+
+// Mark: - MFMailComposeViewControllerDelegate
+extension CVContactViewController: MFMailComposeViewControllerDelegate {
+    func sendEmail(to recipient: String, withMessage message: String) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([recipient])
+            mail.setMessageBody("<p>(\(message))!</p>", isHTML: true)
+            
+            present(mail, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Sorry, an error occured:(", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }

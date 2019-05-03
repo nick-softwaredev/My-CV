@@ -9,13 +9,14 @@
 import Foundation
 
 struct CVExperienceModel {
-    
     enum ExperienceType {
         case job, certificate, selfEducation
     }
-    
+    //Used for experienceCollectionView setup
     let type: ExperienceType
     let imageName: String
+    //Used for CVCollectionDetailViewController setup
+    let name: String
     let description: String
     let url: URL?
 }

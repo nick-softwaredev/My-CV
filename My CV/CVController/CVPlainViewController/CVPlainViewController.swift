@@ -27,6 +27,24 @@ class CVPlainViewController: CVDataViewController, CVSetupDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard index <= 1 else {
+            profileImageHeightConstraint.constant = 0
+            return
+        }
+        prepareForImageTransition()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard index <= 1 else {
+            return
+        }
+        animateImageTransition()
+    }
+    
+    // Prepares to animate image appereance and dissappearance for fisrt and second page (index) accordingly.
+    private func prepareForImageTransition() {
         if index == 1 {
             profileImageHeightConstraint.constant = 120
             profileImage.alpha = 1
@@ -36,9 +54,8 @@ class CVPlainViewController: CVDataViewController, CVSetupDelegate {
             profileImage.alpha = 0
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    // Animates image appereance and dissappearance for fisrt and second page (index) accordingly.
+    private func animateImageTransition() {
         if index == 1 {
             DispatchQueue.main.async {
                 self.profileImageHeightConstraint.constant = 0
@@ -61,20 +78,10 @@ class CVPlainViewController: CVDataViewController, CVSetupDelegate {
         }
     }
     
-    override func setupWith(descpription: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
-        descriptionText = descpription ?? ""
+    
+    override func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
+        descriptionText = description ?? ""
         profileImageString = profileImageName ?? ""
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

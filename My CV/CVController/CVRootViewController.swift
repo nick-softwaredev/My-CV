@@ -12,7 +12,6 @@ class CVRootViewController: UIViewController, UIPageViewControllerDelegate {
     
     var pageViewController: UIPageViewController?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -25,7 +24,6 @@ class CVRootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
         
         self.pageViewController!.dataSource = self.cvModelController
-        
         self.addChild(self.pageViewController!)
         self.view.addSubview(self.pageViewController!.view)
         

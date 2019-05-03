@@ -12,48 +12,98 @@ import UIKit
 
 class CVDataViewController: UIViewController {
     
-    //private var index = 0
-  //  var titleLabelText = ""
-  //  var titleLabelText_ = ""
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
+    // Mark: Defining properties that are used by all children contollers.
     var pageData = CVPageModel()
     
-    var index: Int {
+    final var index: Int {
         get {
             return pageData.pageIndex
         }
     }
     
-    var titleLabelText: String {
+    final var titleLabelText: String {
         get {
             return pageData.title
         }
     }
     
+    final var currentBackgroundImage: UIImage? {
+        get {
+            return backgroundImageView.image
+        }
+    }
+    
+    //Mark: Defining class properties
     private let imageArray = ["page1_backgroundImage", "page2_backgroundImage", "page3_backgroundImage", "page4_backgroundImage"]
     
-    weak var delegate: CVSetupDelegate?
-
+    var numberOfPages = 0
     
+    private weak var delegate: CVSetupDelegate?
+
+    private var pageControl =  UIPageControl()
+    private var backgroundImageView  = UIImageView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backgroundImageView  = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        guard imageArray.count > index else {
-            backgroundImageView.backgroundColor = .lightGray
-            view.insertSubview(backgroundImageView, at: 0)
-            return
-        }
-        backgroundImageView.image = UIImage(named: imageArray[index])
+        setupView()
+    }
+    
+    private func setupView() {
+        setupViewBackground()
+        configurePageControl()
+    }
+    
+    private func setupViewBackground() {
+//        guard imageArray.count == numberOfPages else {
+//            view.backgroundColor = .lightGray
+//            return
+//        }
+        backgroundImageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        backgroundImageView.image = UIImage(named: imageArray[getImageFor(pageIndex: index)])
         backgroundImageView.sendSubviewToBack(view)
         backgroundImageView.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImageView, at: 0)
     }
     
-    func setupWith(descpription: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
-        delegate?.setupWith(descpription: descpription, profileImageName: profileImageName, experienceData: experienceData, contactData: contactData)
+    private func configurePageControl() {
+        pageControl.numberOfPages = numberOfPages
+        pageControl.currentPage = index
+        pageControl.tintColor = .black
+        pageControl.pageIndicatorTintColor = .white
+        pageControl.currentPageIndicatorTintColor = .gray
+        pageControl.isUserInteractionEnabled = false
+        view.addSubview(pageControl)
+        
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        pageControl.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+        pageControl.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16).isActive = true
+    }
+    
+    private func getImageFor(pageIndex pageIndex_: Int) -> Int{
+        if pageIndex_ < imageArray.count {
+            return pageIndex_
+        }
+        return getImageFor(pageIndex: pageIndex_ - imageArray.count)
+    }
+    
+    func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
+        delegate?.setupWith(description: description, profileImageName: profileImageName, experienceData: experienceData, contactData: contactData)
     }
 
 }
 
 protocol CVSetupDelegate: class {
-    func setupWith(descpription: String?,profileImageName: String?,experienceData: [Int: [CVExperienceModel]]?,contactData: CVContactModel?)
+    ///This function is required to setup view with infromation from the pageModel object, each child overrides with its specified required parameters.
+    ///
+    /// - Parameter description: optional String that contains description (CVPalinController required).
+    ///  - Parameter profileImageName: optional String with profile image name (CVPlainController required).
+    /// - Parameter  experienceData: optinal dictionary that contains Int(section number) as key and [CVExperienceModel] as value (CVDynamicController required).
+    ///  - Parameter contactData: optinal CVContactModel (CVContactController required).
+    func setupWith(description: String?,profileImageName: String?,experienceData: [Int: [CVExperienceModel]]?,contactData: CVContactModel?)
 }

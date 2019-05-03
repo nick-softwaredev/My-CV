@@ -18,19 +18,12 @@ enum CVPageModelKeys: String {
     case contactData = "contactDataKey"
 }
 
+//Defines model of the entity(page)
 struct CVPageModel {
-    
-//    enum ModelKeys: String {
-//        case titleKey = "titleKey"
-//        case descriptionKey = "descriptionKey"
-//        case profileImageKey = "profileImageKey"
-//        case contentTypeKey = "contentTypeKey"
-//    }
-    
     enum ContentType {
         case plain, dynamic, contact
     }
-    
+
     var pageIndex = 0
     var title = ""
     var description: String?

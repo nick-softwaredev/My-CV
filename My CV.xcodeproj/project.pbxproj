@@ -10,6 +10,8 @@
 		013CC72D2278763F00496BB6 /* CVPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013CC72C2278763F00496BB6 /* CVPageModel.swift */; };
 		013CC72F227876D300496BB6 /* CVExperienceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013CC72E227876D300496BB6 /* CVExperienceModel.swift */; };
 		013CC731227876EE00496BB6 /* CVContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013CC730227876EE00496BB6 /* CVContactModel.swift */; };
+		018124AF227C4C70008A1CB0 /* CVButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018124AE227C4C70008A1CB0 /* CVButton.swift */; };
+		018124B1227C4C8F008A1CB0 /* CVTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018124B0227C4C8F008A1CB0 /* CVTextField.swift */; };
 		0197C3CF2279994B00D6FE89 /* CVCollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197C3CE2279994B00D6FE89 /* CVCollectionDetailViewController.swift */; };
 		0197C3D122799D1000D6FE89 /* CVDynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197C3D022799D1000D6FE89 /* CVDynamicViewController.swift */; };
 		0197C3DB2279A71900D6FE89 /* CVContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197C3DA2279A71900D6FE89 /* CVContactViewController.swift */; };
@@ -25,7 +27,6 @@
 		01E30BDC22758174008D71B2 /* CVDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BDB22758174008D71B2 /* CVDataViewController.swift */; };
 		01E30BDE22758480008D71B2 /* CVModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BDD22758480008D71B2 /* CVModelController.swift */; };
 		01E30BE022759116008D71B2 /* CVRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BDF22759116008D71B2 /* CVRootViewController.swift */; };
-		01E30BE2227595A0008D71B2 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E30BE12275959F008D71B2 /* Identifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		013CC72C2278763F00496BB6 /* CVPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPageModel.swift; sourceTree = "<group>"; };
 		013CC72E227876D300496BB6 /* CVExperienceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVExperienceModel.swift; sourceTree = "<group>"; };
 		013CC730227876EE00496BB6 /* CVContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVContactModel.swift; sourceTree = "<group>"; };
+		018124AE227C4C70008A1CB0 /* CVButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVButton.swift; sourceTree = "<group>"; };
+		018124B0227C4C8F008A1CB0 /* CVTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVTextField.swift; sourceTree = "<group>"; };
 		0197C3CE2279994B00D6FE89 /* CVCollectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVCollectionDetailViewController.swift; sourceTree = "<group>"; };
 		0197C3D022799D1000D6FE89 /* CVDynamicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVDynamicViewController.swift; sourceTree = "<group>"; };
 		0197C3DA2279A71900D6FE89 /* CVContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVContactViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +73,6 @@
 		01E30BDB22758174008D71B2 /* CVDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVDataViewController.swift; sourceTree = "<group>"; };
 		01E30BDD22758480008D71B2 /* CVModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVModelController.swift; sourceTree = "<group>"; };
 		01E30BDF22759116008D71B2 /* CVRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVRootViewController.swift; sourceTree = "<group>"; };
-		01E30BE12275959F008D71B2 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,8 @@
 				0197C3DD2279A94900D6FE89 /* CVPlainView */,
 				0197C3DC2279A92F00D6FE89 /* CVContactView */,
 				0197C3D522799DAD00D6FE89 /* CVDynamicView */,
+				018124AE227C4C70008A1CB0 /* CVButton.swift */,
+				018124B0227C4C8F008A1CB0 /* CVTextField.swift */,
 			);
 			path = CVView;
 			sourceTree = "<group>";
@@ -220,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				01E30BA922757774008D71B2 /* AppDelegate.swift */,
-				01E30BE12275959F008D71B2 /* Identifiers.swift */,
 				0197C3D322799D3900D6FE89 /* CVModel */,
 				0197C3D422799D4D00D6FE89 /* CVView */,
 				0197C3D222799D1900D6FE89 /* CVController */,
@@ -380,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				018124AF227C4C70008A1CB0 /* CVButton.swift in Sources */,
 				0197C3E02279AA5400D6FE89 /* CVPlainViewController.swift in Sources */,
 				013CC731227876EE00496BB6 /* CVContactModel.swift in Sources */,
 				01B1489E227730FD003AD1D7 /* CVCollectionViewSectionHeader.swift in Sources */,
@@ -389,10 +393,10 @@
 				0197C3CF2279994B00D6FE89 /* CVCollectionDetailViewController.swift in Sources */,
 				013CC72F227876D300496BB6 /* CVExperienceModel.swift in Sources */,
 				01E30BDE22758480008D71B2 /* CVModelController.swift in Sources */,
-				01E30BE2227595A0008D71B2 /* Identifiers.swift in Sources */,
 				01B1489C2276E4CB003AD1D7 /* CVCollectionViewCell.swift in Sources */,
 				013CC72D2278763F00496BB6 /* CVPageModel.swift in Sources */,
 				01E30BAA22757774008D71B2 /* AppDelegate.swift in Sources */,
+				018124B1227C4C8F008A1CB0 /* CVTextField.swift in Sources */,
 				01E30BDC22758174008D71B2 /* CVDataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,8 +572,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GHM8LJ696F;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "My CV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -577,6 +581,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "IndieApps.My-CV";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -586,8 +591,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GHM8LJ696F;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "My CV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -595,6 +600,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "IndieApps.My-CV";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

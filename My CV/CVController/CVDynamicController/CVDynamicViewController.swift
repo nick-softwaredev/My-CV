@@ -13,6 +13,9 @@ class CVDynamicViewController: CVDataViewController, CVSetupDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     
     private var experienceModel = [Int: [CVExperienceModel]]()
+    private let cellID = "CVCell"
+    private let detailSegueID = "toDetailVC"
+    private let headerID = "CVCollectionViewSectionHeader"
     
     @IBOutlet weak var experienceCollectionView: UICollectionView!
     
@@ -27,28 +30,29 @@ class CVDynamicViewController: CVDataViewController, CVSetupDelegate {
 
     }
     
-    override func setupWith(descpription: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
+    override func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
         experienceModel = experienceData ?? [Int : [CVExperienceModel]]()
     }
 
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         let vc = segue.destination as? CVCollectionDetailViewController
         let index = sender as! IndexPath
-        vc?.detailName = experienceModel[index.section]?[index.row].imageName ?? ""
+        vc?.detailName = experienceModel[index.section]?[index.row].name ?? ""
         vc?.detailDescription = experienceModel[index.section]?[index.row].description ?? ""
-        // Pass the selected object to the new view controller.
+        vc?.backgroundImage = currentBackgroundImage
+        vc?.link = experienceModel[index.section]?[index.row].url
     }
  
 
 }
 
+// Mark: - CollectionView Delegate and Data Source
+
 extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return experienceModel.count
     }
@@ -61,21 +65,39 @@ extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDat
         return
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCell", for: indexPath) as? CVCollectionViewCell else {
-            return UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? CVCollectionViewCell else {
+            return CVCollectionViewCell()
         }
         cell.setupCell(experienceModel[indexPath.section]?[indexPath.row].imageName ?? "")
         cell.imageTapped = { [weak self] in
-            self?.performSegue(withIdentifier: "toDetailVC", sender: indexPath)
+            self?.performSegue(withIdentifier: self?.detailSegueID ?? "", sender: indexPath)
         }
+        
+        UIView.animate(withDuration: 1, delay: 1 * Double(indexPath.row), usingSpringWithDamping: 1, initialSpringVelocity: 1, options: indexPath.row % 2 == 0 ? .transitionFlipFromLeft : .transitionFlipFromRight, animations: {
+            
+            if indexPath.row % 2 == 0 {
+                self.viewSlideInFromLeft(toRight: cell)
+            }
+            else {
+                self.viewSlideInFromRight(toLeft: cell)
+            }
+            
+        }, completion: { (done) in
+           
+        })
+        
+        
+        
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CVCollectionViewSectionHeader", for: indexPath) as? CVCollectionViewSectionHeader {
-            let index = experienceModel.filter( {(element) in element.key == indexPath.section }).map { $0.key }.first ?? -1
-            sectionHeader.setup(index)
+        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CVCollectionViewSectionHeader {
+            //section number is equal to experienceData key, so we retrieve key's value (Int)
+            let index = experienceModel.filter( {(element) in element.key == indexPath.section }).map { $0.key }.first ?? -1 // negative number to hit default setupTitle case
+            sectionHeader.setupTitle(section: index)
             return sectionHeader
         }
         return UICollectionReusableView()
@@ -83,10 +105,10 @@ extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDat
     
 }
 
+// Mark: - Custom CollectionView layout setup
+
 extension CVDynamicViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //        let width = Int(collectionView.frame.width/2 - 2 - 2-2)
-        //        return CGSize(width: width, height: width)
         let randomSize = 64 * Int(arc4random_uniform(UInt32(3))+1)
         return CGSize(width: randomSize, height: randomSize)
     }
@@ -103,9 +125,55 @@ extension CVDynamicViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//Mark: - Animation Methods
+private var kSlideAnimationDuration: CFTimeInterval {
+    get {
+    return 0.4
+    }
+}
 
-extension CVDynamicViewController:  UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
+extension CVDynamicViewController: CAAnimationDelegate {
+     func viewSlideInFromRight(toLeft views: UIView) {
+        var transition: CATransition? = nil
+        transition = CATransition.init()
+        transition?.duration = kSlideAnimationDuration
+        transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition?.type = CATransitionType.push
+        transition?.subtype = CATransitionSubtype.fromRight
+        //        transition?.delegate = (self as! CAAnimationDelegate)
+        views.layer.add(transition!, forKey: nil)
+    }
+    
+     func viewSlideInFromLeft(toRight views: UIView) {
+        var transition: CATransition? = nil
+        transition = CATransition.init()
+        transition?.duration = kSlideAnimationDuration
+        transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition?.type = CATransitionType.push
+        transition?.subtype = CATransitionSubtype.fromLeft
+        //        transition?.delegate = (self as! CAAnimationDelegate)
+        views.layer.add(transition!, forKey: nil)
+    }
+    
+     func viewSlideInFromTop(toBottom views: UIView) {
+        var transition: CATransition? = nil
+        transition = CATransition.init()
+        transition?.duration = kSlideAnimationDuration
+        transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition?.type = CATransitionType.push
+        transition?.subtype = CATransitionSubtype.fromBottom
+        //        transition?.delegate = (self as! CAAnimationDelegate)
+        views.layer.add(transition!, forKey: nil)
+    }
+    
+     func viewSlideInFromBottom(toTop views: UIView) {
+        var transition: CATransition? = nil
+        transition = CATransition.init()
+        transition?.duration = kSlideAnimationDuration
+        transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition?.type = CATransitionType.push
+        transition?.subtype = CATransitionSubtype.fromTop
+        //        transition?.delegate = (self as! CAAnimationDelegate)
+        views.layer.add(transition!, forKey: nil)
     }
 }

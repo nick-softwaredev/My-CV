@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 class CVCollectionViewSectionHeader: UICollectionReusableView {
+    
     @IBOutlet weak var sectionHeaderlabel: UILabel!
     
-    func setup(_ index: Int) {
-        switch index {
+    func setupTitle(section: Int) {
+        switch section {
         case 0:
             sectionHeaderlabel.text = "Work Experience"
         case 1:

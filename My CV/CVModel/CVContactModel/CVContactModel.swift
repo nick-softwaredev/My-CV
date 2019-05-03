@@ -12,10 +12,3 @@ struct CVContactModel {
     var phoneNumber: String?
     var email: String?
 }
-
-//extension CVContactModel {
-//    init(phoneNumber: String, email: String) {
-//        self.phoneNumber = phoneNumber
-//        self.email = email
-//    }
-//}
