@@ -39,8 +39,10 @@ class CVDynamicViewController: CVDataViewController, CVSetupDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
+        guard let index = sender as? IndexPath else {
+            return
+        }
         let vc = segue.destination as? CVCollectionDetailViewController
-        let index = sender as! IndexPath
         vc?.detailName = experienceModel[index.section]?[index.row].name ?? ""
         vc?.detailDescription = experienceModel[index.section]?[index.row].description ?? ""
         vc?.backgroundImage = currentBackgroundImage

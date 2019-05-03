@@ -89,7 +89,7 @@ class CVContactViewController: CVDataViewController, CVSetupDelegate {
 extension CVContactViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 40
-        let currentString: NSString = textField.text! as NSString
+        let currentString: NSString = (textField.text ?? "") as NSString
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
         return newString.length <= maxLength
@@ -103,7 +103,7 @@ extension CVContactViewController: MFMailComposeViewControllerDelegate {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients([recipient])
-            mail.setMessageBody("<p>(\(message))!</p>", isHTML: true)
+            mail.setMessageBody("\(message)", isHTML: false)
             
             present(mail, animated: true)
         } else {

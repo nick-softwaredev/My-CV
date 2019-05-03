@@ -55,7 +55,7 @@ class CVModelController: NSObject, UIPageViewControllerDataSource {
             cvPageController.numberOfPages = pageData.count
             return cvPageController
         case .contact:
-             let cvPageController  = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.cvContactController.rawValue) as! CVContactViewController
+             let cvPageController  = storyboard.instantiateViewController(withIdentifier: ViewControllerIdentifiers.cvContactController.rawValue) as? CVContactViewController ?? CVContactViewController()
              cvPageController.pageData = pageData[index]
              cvPageController.setupWith(contactData: pageData[index].contactData)
              cvPageController.numberOfPages = pageData.count
