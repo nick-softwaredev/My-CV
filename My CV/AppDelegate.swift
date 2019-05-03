@@ -41,15 +41,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
-extension UserDefaults {
-    static func isFirstLaunch() -> Bool {
-        let applicationWasLaunchedFirstTimeKey = "applicationWasLaunchedFirstTime"
-        let isFirstLaunch = !UserDefaults.standard.bool(forKey: applicationWasLaunchedFirstTimeKey)
-        if (isFirstLaunch) {
-            UserDefaults.standard.set(true, forKey: applicationWasLaunchedFirstTimeKey)
-            UserDefaults.standard.synchronize()
-        }
-        return isFirstLaunch
-    }
-}
