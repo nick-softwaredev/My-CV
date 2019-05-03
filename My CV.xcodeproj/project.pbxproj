@@ -126,6 +126,7 @@
 		0197C3D422799D4D00D6FE89 /* CVView */ = {
 			isa = PBXGroup;
 			children = (
+				01E30BB622757775008D71B2 /* LaunchScreen.storyboard */,
 				01E30BB122757774008D71B2 /* Main.storyboard */,
 				0197C3DD2279A94900D6FE89 /* CVPlainView */,
 				0197C3DC2279A92F00D6FE89 /* CVContactView */,
@@ -223,13 +224,12 @@
 		01E30BA822757774008D71B2 /* My CV */ = {
 			isa = PBXGroup;
 			children = (
+				01E30BB422757775008D71B2 /* Assets.xcassets */,
+				01E30BB922757775008D71B2 /* Info.plist */,
 				01E30BA922757774008D71B2 /* AppDelegate.swift */,
 				0197C3D322799D3900D6FE89 /* CVModel */,
 				0197C3D422799D4D00D6FE89 /* CVView */,
 				0197C3D222799D1900D6FE89 /* CVController */,
-				01E30BB422757775008D71B2 /* Assets.xcassets */,
-				01E30BB622757775008D71B2 /* LaunchScreen.storyboard */,
-				01E30BB922757775008D71B2 /* Info.plist */,
 			);
 			path = "My CV";
 			sourceTree = "<group>";

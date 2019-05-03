@@ -12,10 +12,6 @@ import UIKit
 
 class CVDataViewController: UIViewController {
     
-    override var prefersHomeIndicatorAutoHidden: Bool {
-        return true
-    }
-    
     // Mark: Defining properties that are used by all children contollers.
     var pageData = CVPageModel()
     
@@ -58,10 +54,6 @@ class CVDataViewController: UIViewController {
     }
     
     private func setupViewBackground() {
-//        guard imageArray.count == numberOfPages else {
-//            view.backgroundColor = .lightGray
-//            return
-//        }
         backgroundImageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         backgroundImageView.image = UIImage(named: imageArray[getImageFor(pageIndex: index)])
         backgroundImageView.sendSubviewToBack(view)
@@ -85,6 +77,7 @@ class CVDataViewController: UIViewController {
         pageControl.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16).isActive = true
     }
     
+    // Function return index of imageName stored in array
     private func getImageFor(pageIndex pageIndex_: Int) -> Int{
         if pageIndex_ < imageArray.count {
             return pageIndex_
@@ -99,7 +92,7 @@ class CVDataViewController: UIViewController {
 }
 
 protocol CVSetupDelegate: class {
-    ///This function is required to setup view with infromation from the pageModel object, each child overrides with its specified required parameters.
+    ///This function is required to setup view with infromation from the pageModel object, each child overrides with its providies required parameters to fucntion properly.
     ///
     /// - Parameter description: optional String that contains description (CVPalinController required).
     ///  - Parameter profileImageName: optional String with profile image name (CVPlainController required).

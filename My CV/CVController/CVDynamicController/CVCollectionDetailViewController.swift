@@ -36,7 +36,7 @@ class CVCollectionDetailViewController: UIViewController,  UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
          detailNameLabel.text = detailName
-         detailTextView.text = detailDescription
+         detailTextView.text = detailDescription.splitOnLines()
          detailBackgroundImage.blurImage()
          detailBackgroundImage.image = backgroundImage
         

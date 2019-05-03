@@ -16,12 +16,12 @@ class CVPlainViewController: CVDataViewController, CVSetupDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileImageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var descriptionTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = titleLabelText
-        descriptionLabel.text = descriptionText
+        descriptionTextView.text = descriptionText.splitOnLines()
         profileImage.image = UIImage(named: profileImageString)
     }
     

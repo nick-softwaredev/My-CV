@@ -26,6 +26,7 @@ struct CVPageModel {
 
     var pageIndex = 0
     var title = ""
+    // Warning: - description field should be using characters that are defined in splitOnLines() carefully to accuretly format it's content.
     var description: String?
     var profileImageTitle: String?
     var contentType:  ContentType = .plain

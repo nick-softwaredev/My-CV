@@ -17,6 +17,7 @@ struct CVExperienceModel {
     let imageName: String
     //Used for CVCollectionDetailViewController setup
     let name: String
+    // Warning: - description field should be using characters that are defined in splitOnLines() carefully to accuretly format it's content.
     let description: String
     let url: URL?
 }

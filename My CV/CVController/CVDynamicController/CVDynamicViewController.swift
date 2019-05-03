@@ -22,8 +22,8 @@ class CVDynamicViewController: CVDataViewController, CVSetupDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = titleLabelText
-        }
-        // Do any additional setup after loading the view.
+    }
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -72,23 +72,14 @@ extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.imageTapped = { [weak self] in
             self?.performSegue(withIdentifier: self?.detailSegueID ?? "", sender: indexPath)
         }
-        
         UIView.animate(withDuration: 1, delay: 1 * Double(indexPath.row), usingSpringWithDamping: 1, initialSpringVelocity: 1, options: indexPath.row % 2 == 0 ? .transitionFlipFromLeft : .transitionFlipFromRight, animations: {
-            
             if indexPath.row % 2 == 0 {
                 self.viewSlideInFromLeft(toRight: cell)
             }
             else {
                 self.viewSlideInFromRight(toLeft: cell)
             }
-            
-        }, completion: { (done) in
-           
         })
-        
-        
-        
-        
         return cell
     }
     
@@ -96,7 +87,7 @@ extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDat
         
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CVCollectionViewSectionHeader {
             //section number is equal to experienceData key, so we retrieve key's value (Int)
-            let index = experienceModel.filter( {(element) in element.key == indexPath.section }).map { $0.key }.first ?? -1 // negative number to hit default setupTitle case
+            let index = experienceModel.filter( {(element) in element.key == indexPath.section }).map { $0.key }.first ?? -1
             sectionHeader.setupTitle(section: index)
             return sectionHeader
         }
@@ -109,8 +100,8 @@ extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension CVDynamicViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let randomSize = 64 * Int(arc4random_uniform(UInt32(3))+1)
-        return CGSize(width: randomSize, height: randomSize)
+        //let randomSize = 64 * Int(arc4random_uniform(UInt32(3))+1)
+        return CGSize(width: collectionView.frame.width/2-4, height: collectionView.frame.width/2-4)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return (UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2))
@@ -140,7 +131,6 @@ extension CVDynamicViewController: CAAnimationDelegate {
         transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition?.type = CATransitionType.push
         transition?.subtype = CATransitionSubtype.fromRight
-        //        transition?.delegate = (self as! CAAnimationDelegate)
         views.layer.add(transition!, forKey: nil)
     }
     
@@ -151,7 +141,6 @@ extension CVDynamicViewController: CAAnimationDelegate {
         transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition?.type = CATransitionType.push
         transition?.subtype = CATransitionSubtype.fromLeft
-        //        transition?.delegate = (self as! CAAnimationDelegate)
         views.layer.add(transition!, forKey: nil)
     }
     
@@ -162,7 +151,6 @@ extension CVDynamicViewController: CAAnimationDelegate {
         transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition?.type = CATransitionType.push
         transition?.subtype = CATransitionSubtype.fromBottom
-        //        transition?.delegate = (self as! CAAnimationDelegate)
         views.layer.add(transition!, forKey: nil)
     }
     
@@ -173,7 +161,6 @@ extension CVDynamicViewController: CAAnimationDelegate {
         transition?.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition?.type = CATransitionType.push
         transition?.subtype = CATransitionSubtype.fromTop
-        //        transition?.delegate = (self as! CAAnimationDelegate)
         views.layer.add(transition!, forKey: nil)
     }
 }

@@ -20,7 +20,10 @@ class CVButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = UIColor(red: 0.1, green: 0.2, blue: 0.5, alpha: 1)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         self.setTitleColor(.white, for: .normal)
+        self.layer.borderWidth = 2
+        self.layer.borderColor  = UIColor.white.cgColor
         self.layer.cornerRadius = 10
     }
 }
