@@ -32,6 +32,7 @@ class CVDynamicViewController: CVDataViewController, CVSetupDelegate {
     
     override func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
         experienceModel = experienceData ?? [Int : [CVExperienceModel]]()
+        print("\(self) was setup")
     }
 
     
@@ -74,12 +75,12 @@ extension CVDynamicViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.imageTapped = { [weak self] in
             self?.performSegue(withIdentifier: self?.detailSegueID ?? "", sender: indexPath)
         }
-        UIView.animate(withDuration: 1, delay: 1 * Double(indexPath.row), usingSpringWithDamping: 1, initialSpringVelocity: 1, options: indexPath.row % 2 == 0 ? .transitionFlipFromLeft : .transitionFlipFromRight, animations: {
+        UIView.animate(withDuration: 1, delay: 1 * Double(indexPath.row), usingSpringWithDamping: 1, initialSpringVelocity: 1, options: indexPath.row % 2 == 0 ? .transitionFlipFromLeft : .transitionFlipFromRight, animations: { [weak self] in
             if indexPath.row % 2 == 0 {
-                self.viewSlideInFromLeft(toRight: cell)
+                self?.viewSlideInFromLeft(toRight: cell)
             }
             else {
-                self.viewSlideInFromRight(toLeft: cell)
+                self?.viewSlideInFromRight(toLeft: cell)
             }
         })
         return cell

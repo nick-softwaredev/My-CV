@@ -18,6 +18,9 @@ class CVCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 10
         setupBackgroundImage()
     }
+    override func awakeFromNib() {
+        setupBackgroundImage()
+    }
     
     //Mark: Setup cell backgroundImage manually to get properly sized image.
     private func setupBackgroundImage() {

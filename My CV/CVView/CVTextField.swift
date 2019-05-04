@@ -27,7 +27,8 @@ class CVTextView: UITextView {
 }
 
 extension String {
-    //used to format description propertie of CVPageModel and CVexperienceModel.
+    //This func is used to format description text of CVPageModel's and CVexperienceModel's text by splitting(by given separator) it and adding two new lines in between.
+    //Note "."or ":" is excluded to avoid unnesessary new lines(for example for "." at the end of the text)
     func splitOnLines() -> String {
         let formattedText = self.components(separatedBy: ". ").joined(separator: ".\n\n").components(separatedBy: ": ").joined(separator: ":\n\n")
         return formattedText

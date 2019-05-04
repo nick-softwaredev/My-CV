@@ -29,7 +29,7 @@
         <scene sceneID="ITg-iQ-15a">
             <objects>
                 <viewController storyboardIdentifier="CVPlainViewController" id="7oX-0k-sHX" customClass="CVPlainViewController" customModule="My_CV" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="oKx-XG-Tg9" customClass="CVPlainView" customModule="My_CV" customModuleProvider="target">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="oKx-XG-Tg9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -159,9 +159,7 @@
                     <connections>
                         <outlet property="experienceCollectionView" destination="P6U-Dy-wR9" id="GeW-eX-dYy"/>
                         <outlet property="titleLabel" destination="5bg-ni-DYx" id="KTE-tD-M33"/>
-                        <segue destination="PNN-7x-uOr" kind="popoverPresentation" identifier="toDetailVC" popoverAnchorView="P6U-Dy-wR9" id="bsM-IV-f8o">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
-                        </segue>
+                        <segue destination="PNN-7x-uOr" kind="presentation" identifier="toDetailVC" modalTransitionStyle="crossDissolve" id="bsM-IV-f8o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Baq-A9-P5u" userLabel="First Responder" sceneMemberID="firstResponder"/>

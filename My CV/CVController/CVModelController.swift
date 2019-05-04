@@ -103,14 +103,14 @@ extension CVModelController {
             
             CVPageModel(pageIndex: 0,
                         title: "Hello",
-                        description: "My name is Nickita and I am 21 year old Trainee IOS software developer with 1 year of experience that was mainly focused on hardware oriented application and RESTful API driven development.",
+                        description: "My name is Nickita and I am 21 year old Trainee IOS software developer with 9 month of experience that was mainly focused on hardware oriented application and RESTful API driven development.",
                         profileImageTitle: "profile_image",
                         contentType: .plain,
                         experienceData: nil,
                         contactData: nil),
             CVPageModel(pageIndex: 1,
                         title: "About me",
-                        description: "So here is the information about me. Education: Kyiv-Mohyla National Academy, Bachelor of Economics, Finance - 2015 - present. Curiosity and Apple products in my possesion made me to get into learning Computer Sceince and  Swift programming language on my own by taking development courses both online and in class. My work experience includes: - CONCEPTER HQ, IOS TRAINEE — 12/2017 - 03/2018. - CONCEPTER HQ, JUNIOR IOS SOFTWARE ENGINEER - 03/2018 - 09/2018.(Left the company to successfully complete final course of University). Swipe to see the details.",
+                        description: "So here is the information about me. Education: Kyiv-Mohyla National Academy, Bachelor of Economics, Finance - 2015 - present. Curiosity and Apple products in my possesion made me to get into learning Computer Sceince and  Swift programming language on my own by taking development courses both online and in class. My work experience includes: - CONCEPTER HQ, IOS TRAINEE — 09/2017 - 03/2018. - CONCEPTER HQ, JUNIOR IOS SOFTWARE ENGINEER - 03/2018 - 09/2018.(Left the company to successfully complete final course of University). Swipe to see the details.",
                         profileImageTitle: "profile_image", /* passing same image name to animate transition */
                         contentType: .plain,
                         experienceData: nil,

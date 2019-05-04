@@ -40,6 +40,7 @@ class CVContactViewController: CVDataViewController, CVSetupDelegate {
     
     override func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
         contactModel = contactData
+        print("\(self) was setup")
     }
     
     private func setupContactAlert() {

@@ -34,8 +34,9 @@ class CVDataViewController: UIViewController {
     }
     
     //Mark: Defining class properties
-    private let imageArray = ["page1_backgroundImage", "page2_backgroundImage", "page3_backgroundImage", "page4_backgroundImage"]
+    private let backgroundImageNameArray = ["page1_backgroundImage", "page2_backgroundImage", "page3_backgroundImage", "page4_backgroundImage"]
     
+    //used for pageControl setup
     var numberOfPages = 0
     
     private weak var delegate: CVSetupDelegate?
@@ -55,9 +56,10 @@ class CVDataViewController: UIViewController {
     
     private func setupViewBackground() {
         backgroundImageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        backgroundImageView.image = UIImage(named: imageArray[getImageFor(pageIndex: index)])
+        backgroundImageView.image = UIImage(named: backgroundImageNameArray[getImageFor(pageIndex: index)])
         backgroundImageView.sendSubviewToBack(view)
         backgroundImageView.contentMode = .scaleAspectFill
+        //insert at the back of the view
         view.insertSubview(backgroundImageView, at: 0)
     }
     
@@ -79,10 +81,10 @@ class CVDataViewController: UIViewController {
     
     // Function return index of imageName stored in array
     private func getImageFor(pageIndex pageIndex_: Int) -> Int{
-        if pageIndex_ < imageArray.count {
+        if pageIndex_ < backgroundImageNameArray.count {
             return pageIndex_
         }
-        return getImageFor(pageIndex: pageIndex_ - imageArray.count)
+        return getImageFor(pageIndex: pageIndex_ - backgroundImageNameArray.count)
     }
     
     func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {

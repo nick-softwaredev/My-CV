@@ -82,6 +82,7 @@ class CVPlainViewController: CVDataViewController, CVSetupDelegate {
     override func setupWith(description: String? = nil,profileImageName: String? = nil,experienceData: [Int: [CVExperienceModel]]? = nil ,contactData: CVContactModel? = nil) {
         descriptionText = description ?? ""
         profileImageString = profileImageName ?? ""
+        print("\(self) was setup")
     }
 
 }
