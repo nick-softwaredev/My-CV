@@ -9,8 +9,8 @@ iOS deployment verison: 12.2.
 
 Development environment - Xcode 10.2.1.
 
-To run sinply clone the repository (checkout master branch).
+To run simply clone the repository (checkout master branch).
 
-NOTE: app contains features that are unavailable in simulator, so make sure to run it on a real device. 
+NOTE: _app contains features that are unavailable in simulator, so make sure to run it on a real device._ 
 
-* Please nevermind commit messages, I made a mistake forgetting that they will be seen by others.
+~~Please nevermind commit messages, I made a mistake forgetting that they will be seen by others.~~
