@@ -13,4 +13,4 @@ To run sinply clone the repository (checkout master branch).
 
 NOTE: app contains features that are unavailable in simulator, so make sure to run it on a real device. 
 
-* Please nevermind commit messages, I made a mistake forgetting that they will be seen by others.*
+* Please nevermind commit messages, I made a mistake forgetting that they will be seen by others.
