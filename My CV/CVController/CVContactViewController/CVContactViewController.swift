@@ -45,22 +45,16 @@ class CVContactViewController: CVDataViewController, CVSetupDelegate {
     
     private func setupContactAlert() {
         let callAction = UIAlertAction(title: "Phone call", style: .default) { [unowned self] (_) in
-            guard let phoneURL = URL(string: "telprompt://\(self.contactModel?.phoneNumber ?? "")") else {
+            guard let phoneURL = URL(string: "tel://\(self.contactModel?.phoneNumber?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "") ?? "")"), UIApplication.shared.canOpenURL(phoneURL) else {
                 return
             }
-            if UIApplication.shared.canOpenURL(phoneURL){
-                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-            }
+                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
         let emailAction = UIAlertAction(title: "Email", style: .default) { [unowned self] (_) in
-            guard let url = URL(string: "mailto:\(self.contactModel?.email ?? "")") else {
+            guard let url = URL(string: "mailto:\(self.contactModel?.email ?? "")"), UIApplication.shared.canOpenURL(url)  else {
                 return
             }
-            if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
         }
         let dissmiss = UIAlertAction(title: "Cancel", style: .cancel) { [unowned self](_) in
             self.contactAlert.dismiss(animated: true, completion: nil)
